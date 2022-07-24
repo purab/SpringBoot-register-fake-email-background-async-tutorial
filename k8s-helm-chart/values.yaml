@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: "helmchart"
+  tag: "v1"
+  pullPolicy: IfNotPresent
+
+deployment:
+  name: helmchart
+  port: 8080
+
+service:
+  name: helmchart
+  type: NodePort
+  port: 8080
+  nodePort: 31000

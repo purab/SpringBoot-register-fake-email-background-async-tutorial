@@ -94,14 +94,18 @@ Convert .crt to .p12
 openssl pkcs12 -export -out server.p12 -inkey server.key -in server.crt
 ```
 Where server.key , is the server key . server.crt is cert file from CA or self sigh
+Add this in application.properties
+```
+server.port=8443
+#server.port=8080
+server.ssl.enabled: true
+server.ssl.key-alias: local_ssl
+server.ssl.key-store: classpath:loacal-ssl.p12
+server.ssl.key-store-type: PKCS12
+server.ssl.key-password: 12345678
+server.ssl.key-store-password: 12345678
 
-#google login
-
-go to https://console.cloud.google.com/apis/credentials?project=shppingcart-springboot-school
-1. create new credentials
-2. Select "OAuth Client ID"
-3. use "Authorized redirect URIs" as this: http://localhost:8080/login/oauth2/code/google
-
+```
 # K8S Helm chart
 
 helm create register-fake-mail-async
@@ -124,3 +128,7 @@ helm rollback register-fake-mail-async 1
 helm uninstall register-fake-mail-async
 helm package ./k8s-helm-chart
 ```
+### More information here:
+* https://github.com/purab/helm-chart-spring-boot
+* https://github.com/gruntwork-io/helm-kubernetes-services/tree/master/charts/k8s-service
+* https://github.com/helm/charts/tree/master/stable/heapster
